@@ -12,6 +12,7 @@ import { StyledLogo } from "../logo/styled";
 import { FiUser } from "react-icons/fi";
 import { RiHeart3Line, RiShoppingCart2Line } from "react-icons/ri";
 import { HeaderMenu } from "../header-menu";
+import { SearchField } from "../search-field";
 
 export const Header = () => (
   <StyledRow>
@@ -20,6 +21,7 @@ export const Header = () => (
         <Col sm={12} md={10}>
           <HeaderWrapper>
             <StyledLogo />
+            <SearchField />
             <UserMenuWrapper>
               <UserInfo>
                 <FiUser color="white" size={25} />

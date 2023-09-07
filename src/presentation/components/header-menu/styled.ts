@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 export const StyledMenuRow = styled(Row)`
   background-color: #FFE101;
+  @media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    display: none;
+  }
 `
 
 export const StyledMenuList = styled.ul`

@@ -8,9 +8,9 @@ export const StyledRow = styled(Row)`
 
 export const HeaderWrapper = styled.header`
   display: flex;
+  height: 85px;
   align-items: center;
   justify-content: space-between;
-  height: 85px;
 ` 
 
 export const UserMenuWrapper = styled.div`
