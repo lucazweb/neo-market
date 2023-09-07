@@ -10,11 +10,7 @@ function App() {
       element: <Home />,
     },
   ]);
-  return (
-    <Grid fluid>
-      <RouterProvider router={router} />
-    </Grid>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

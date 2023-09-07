@@ -5,6 +5,13 @@ export const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-family: 'Roboto', 'Arial';
+    margin:0;
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
   }
 
   *, *:before, *:after {
@@ -24,17 +31,12 @@ export const GlobalStyle = createGlobalStyle`
     margin-top: 2px;
   }
 
-
-  ul {
-    margin-left:0;
-    padding-left:12px;
+  ul, li {
+    margin: 0;
+    padding: 0;
   }
-
-  li {
-    list-style: none;
-    margin-bottom: 6px;
-  }
-
+ 
+ 
  
   
 `;
