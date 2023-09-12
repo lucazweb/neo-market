@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Header, Product } from "@/presentation/components";
 import { Col, Row } from "react-flexbox-grid";
 import { ProductWrapper } from "./styled";
 import { data } from "@/assets/mock-data";
 import { Product as ProductType } from "@/domain/models/products";
+import { CartContext } from "@/main/context";
 
 export type CartProps = {
   cart: {
@@ -13,18 +14,12 @@ export type CartProps = {
 };
 
 export const Home = () => {
-  const [state, setState] = useState<CartProps>({
-    cart: [],
-  });
-
-  useEffect(() => {
-    console.log(data);
-  }, []);
+  const { cart, setState } = useContext(CartContext);
 
   const handlePurchase = (item: ProductType) => {
-    const productInCart = state.cart.find((p) => p.product.id === item.id);
+    const productInCart = cart.find((p) => p.product.id === item.id);
     if (!!productInCart) {
-      const updated = state.cart.map((cartItem) => {
+      const updated = cart.map((cartItem) => {
         if (cartItem.product.id === productInCart.product.id) {
           return {
             ...cartItem,
@@ -34,14 +29,16 @@ export const Home = () => {
         return cartItem;
       });
     } else {
-      const { cart } = state;
-      cart.push({
-        product: item,
-        qtd: 1,
-      });
-      setState({
-        ...state,
-        cart,
+      const data = [
+        ...cart,
+        {
+          product: item,
+          qtd: 1,
+        },
+      ];
+
+      setState!({
+        cart: data,
       });
     }
   };
