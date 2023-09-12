@@ -47,7 +47,7 @@ export const DiscountBox = styled.div`
 
 export const ProductButton = styled.button`
   background: #FFD701;
-  color: white;
+  color: #333;
   border: none;
   border-radius: 25px;
   margin-top: 18px;
