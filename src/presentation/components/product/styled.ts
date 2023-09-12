@@ -45,13 +45,27 @@ export const DiscountBox = styled.div`
   border-radius: 10px 10px 0 0;
 `
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+`
+
 export const ProductButton = styled.button`
   background: #FFD701;
   color: #333;
   border: none;
   border-radius: 25px;
-  margin-top: 18px;
+
   padding: 8px;
   width: 120px;
   cursor: pointer;
+`
+
+export const StyledInput = styled.input`
+  width:40px;
+  height: 25px;
+  font-size: 1.3em;
+  
 `

@@ -1,44 +1,69 @@
 import React, { useEffect, useState } from "react";
 import {
+  ButtonWrapper,
   DiscountBox,
   ProductButton,
   ProductDescription,
   ProductPrice,
   RattingBox,
+  StyledInput,
   StyledWrapper,
 } from "./styled";
+import { Product as ProductType } from "@/domain/models/products";
 
 type ProductProps = {
-  name: string;
-  image: string;
-  price: number;
+  data: ProductType;
+  handleQtd?: () => void;
+  handlePurchase: (item: ProductType) => void;
 };
 
-export const Product = (props: ProductProps) => {
-  const [productImg, setProductImg] = useState();
+export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
+  const [productData, setProductData] = useState({
+    image: "",
+    qtd: 0,
+  });
 
   useEffect(() => {
     (async () => {
-      if (props.image) {
-        const image = await import(`@/assets/${props.image}`);
-        setProductImg(image.default);
+      if (data.image) {
+        const img = await import(`@/assets/${data.image}`);
+        setProductData({
+          ...productData,
+          image: img.default,
+        });
       }
     })();
   }, []);
 
+  const handlePurchaseOnClick = () => {
+    handlePurchase(data);
+
+    setProductData({
+      ...productData,
+      qtd: productData.qtd + 1,
+    });
+  };
+
   return (
     <StyledWrapper>
       <DiscountBox>Aproveite o desconto de 5%</DiscountBox>
-      {productImg && <img src={productImg} alt="playcontrol" />}
+      {productData && <img src={productData.image} alt="playcontrol" />}
 
       <ProductDescription>
-        <span>{props.name}</span>
+        <span>{data.name}</span>
         <RattingBox>stars</RattingBox>
         <ProductPrice>
-          <strong>{props.price}</strong>
+          <strong>{data.price}</strong>
           <span>R$ 45,90</span>
         </ProductPrice>
-        <ProductButton>APROVEITE</ProductButton>
+        <ButtonWrapper style={{ justifyContent: "center" }}>
+          <ProductButton onClick={handlePurchaseOnClick}>
+            APROVEITE
+          </ProductButton>
+          {!!productData.qtd && (
+            <StyledInput type="number" value={productData.qtd} />
+          )}
+        </ButtonWrapper>
       </ProductDescription>
     </StyledWrapper>
   );
