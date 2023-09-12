@@ -14,7 +14,7 @@ export type CartProps = {
 };
 
 export const Home = () => {
-  const { cart, setState } = useContext(CartContext);
+  const { cart, handleCartUpdate } = useContext(CartContext);
 
   const handlePurchase = (item: ProductType) => {
     const productInCart = cart.find((p) => p.product.id === item.id);
@@ -37,9 +37,7 @@ export const Home = () => {
         },
       ];
 
-      setState!({
-        cart: data,
-      });
+      handleCartUpdate!(data);
     }
   };
 

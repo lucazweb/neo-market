@@ -11,11 +11,7 @@ export type CartContextType = {
     product: Product;
     qtd: number;
   }[];
-  setState?: React.Dispatch<
-    React.SetStateAction<{
-      cart: Cart;
-    }>
-  >;
+  handleCartUpdate?: (cart: Cart) => void;
 };
 
 export const CartContext = createContext<CartContextType>({

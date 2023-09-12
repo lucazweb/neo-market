@@ -14,17 +14,37 @@ const router = createBrowserRouter([
     element: <ProductsForm />,
   },
 ]);
+
+const LOCAL_DATA_KEY = "neo-mkt";
+
+export const handleLocalDataSave = (cart: Cart) => {
+  localStorage.setItem(LOCAL_DATA_KEY, JSON.stringify(cart));
+};
+
 function App() {
   const [state, setState] = useState<{ cart: Cart }>({
     cart: [],
   });
 
   useEffect(() => {
-    console.log("from App", state);
-  }, [state.cart]);
+    if (!localStorage.getItem(LOCAL_DATA_KEY)) return;
+    const data = localStorage.getItem(LOCAL_DATA_KEY);
+    const cart = JSON.parse(data!);
+    console.log("local cart", cart);
+    setState({
+      cart,
+    });
+  }, []);
+
+  const handleCartUpdate = (cart: Cart) => {
+    setState({
+      cart,
+    });
+    handleLocalDataSave(cart);
+  };
 
   return (
-    <CartContext.Provider value={{ cart: state.cart, setState }}>
+    <CartContext.Provider value={{ cart: state.cart, handleCartUpdate }}>
       <RouterProvider router={router} />;
     </CartContext.Provider>
   );
