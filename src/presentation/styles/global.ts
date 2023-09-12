@@ -12,12 +12,9 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
+    background: #F5F5F5;
   }
 
-  *, *:before, *:after {
-      box-sizing: inherit;
-    }
-        
 
   h3, h4 {
     margin-bottom: 4px;

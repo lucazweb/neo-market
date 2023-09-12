@@ -14,7 +14,7 @@ export const HeaderWrapper = styled.header`
 ` 
 
 export const UserMenuWrapper = styled.div`
-box-sizing: border-box;
+  box-sizing: border-box;
   width: 25%;
   height: 35px;
   display: flex;
@@ -24,6 +24,14 @@ box-sizing: border-box;
     padding: 0;
     color: white;
     font-size: 0.8em;
+  }
+  @media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .user-info {
+      display: none;
+    }
   }
 `
 
@@ -39,4 +47,5 @@ export const UserButtonsWrapper = styled.div`
   display: flex;
   gap: 12px;
   color: white;
+  box-sizing: border-box;
 `

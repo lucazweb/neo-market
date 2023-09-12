@@ -13,6 +13,6 @@ module.exports = merge(commonConfig, {
     },
     liveReload: true,
     historyApiFallback: true,
-    port: 8080,
+    port: 8081,
   },
 })

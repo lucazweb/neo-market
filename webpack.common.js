@@ -2,6 +2,7 @@ const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const { ContextReplacementPlugin } = require('webpack')
 
 module.exports = {
   entry: './src/main/index.tsx',
@@ -10,8 +11,27 @@ module.exports = {
     filename: 'main-bundle-[hash].js',
     publicPath: '/',
   },
+
   module: {
     rules: [
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          // {
+          //   loader: 'file-loader',
+          // },
+          {
+            loader: 'url-loader',
+            options: {
+              exclude: '/node_modules',
+              limit: 25000, //asset size limit in byte
+              name: '[name].[ext]',
+              outputPath: 'assets/'
+            },
+          }
+        ],
+        type: "javascript/auto"
+      },
       {
         test: /\.ts(x?)$/,
         loader: 'ts-loader',
@@ -36,7 +56,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.scss'],
+    extensions: ['.ts', '.tsx', '.js', '.scss', '.jpg', '.png'],
     alias: {
       '@': path.join(__dirname, 'src'),
     },

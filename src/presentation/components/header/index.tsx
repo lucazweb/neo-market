@@ -25,7 +25,7 @@ export const Header = () => (
             <UserMenuWrapper>
               <UserInfo>
                 <FiUser color="white" size={25} />
-                <div>
+                <div className="user-info">
                   <p>Bem vind(o) </p>
                   <p>
                     <span>Faça login</span> ou<strong>cadastre-se</strong>
