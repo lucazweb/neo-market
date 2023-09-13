@@ -1,4 +1,4 @@
-# NEO MARKETING
+# neomarketing
 
 ### Instalação
 
