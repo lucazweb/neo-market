@@ -5,6 +5,11 @@ import { ProductWrapper } from "./styled";
 import { data } from "@/assets/mock-data";
 import { Product as ProductType } from "@/domain/models/products";
 import { CartContext } from "@/main/context";
+import {
+  Banner,
+  HalfBanners,
+  TripleBanners,
+} from "@/presentation/components/banner";
 
 export type CartProps = {
   cart: {
@@ -56,6 +61,7 @@ export const Home = () => {
   return (
     <>
       <Header />
+      <Banner />
       <Row>
         <Col md={12}>
           <h2>Mega Ofertas</h2>
@@ -76,6 +82,8 @@ export const Home = () => {
           </Row>
         </Col>
       </Row>
+      <HalfBanners />
+      <TripleBanners />
     </>
   );
 };

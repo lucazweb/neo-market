@@ -1,2 +1,2 @@
 export * from './home'
-export * from './banner'
+export * from '../components/banner'
