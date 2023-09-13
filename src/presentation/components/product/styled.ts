@@ -67,5 +67,9 @@ export const StyledInput = styled.input`
   width:40px;
   height: 25px;
   font-size: 1.3em;
-  
+  text-align: center;
+`
+
+export const StyledInputWrapper = styled.div`
+  display: flex;
 `

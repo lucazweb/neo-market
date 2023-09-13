@@ -7,6 +7,7 @@ import {
   ProductPrice,
   RattingBox,
   StyledInput,
+  StyledInputWrapper,
   StyledWrapper,
 } from "./styled";
 import { Product as ProductType } from "@/domain/models/products";
@@ -14,7 +15,7 @@ import { Product as ProductType } from "@/domain/models/products";
 type ProductProps = {
   data: ProductType;
   handleQtd?: () => void;
-  handlePurchase: (item: ProductType) => void;
+  handlePurchase: (product: { item: ProductType; qtd: number }) => void;
 };
 
 export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
@@ -35,13 +36,36 @@ export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
     })();
   }, []);
 
-  const handlePurchaseOnClick = () => {
-    handlePurchase(data);
+  useEffect(() => {
+    console.log(productData.qtd);
+  }, [productData.qtd]);
 
+  const handlePurchaseProduct = () => {
+    handlePurchase({ item: data, qtd: productData.qtd });
+
+    setProductData({
+      ...productData,
+      qtd: productData.qtd === 0 ? 1 : productData.qtd,
+    });
+  };
+
+  const handleAddProduct = () => {
+    console.log("handleAddProduct");
     setProductData({
       ...productData,
       qtd: productData.qtd + 1,
     });
+    handlePurchase({ item: data, qtd: productData.qtd + 1 });
+  };
+
+  const handleRemoveProduct = () => {
+    if (productData.qtd > 0) {
+      setProductData({
+        ...productData,
+        qtd: productData.qtd - 1,
+      });
+    }
+    handlePurchase({ item: data, qtd: productData.qtd - 1 });
   };
 
   return (
@@ -57,11 +81,15 @@ export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
           <span>R$ 45,90</span>
         </ProductPrice>
         <ButtonWrapper style={{ justifyContent: "center" }}>
-          <ProductButton onClick={handlePurchaseOnClick}>
+          <ProductButton onClick={handlePurchaseProduct}>
             APROVEITE
           </ProductButton>
           {!!productData.qtd && (
-            <StyledInput type="number" value={productData.qtd} />
+            <StyledInputWrapper>
+              <button onClick={handleRemoveProduct}>-</button>
+              <StyledInput type="number" value={productData.qtd} />
+              <button onClick={handleAddProduct}>+</button>
+            </StyledInputWrapper>
           )}
         </ButtonWrapper>
       </ProductDescription>

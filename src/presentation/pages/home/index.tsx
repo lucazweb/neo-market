@@ -16,8 +16,8 @@ export type CartProps = {
 export const Home = () => {
   const { cart, handleCartUpdate } = useContext(CartContext);
 
-  const handlePurchase = (item: ProductType) => {
-    const productInCart = cart.find((p) => p.product.id === item.id);
+  const handlePurchase = (product: { item: ProductType; qtd: number }) => {
+    const productInCart = cart.find((p) => p.product.id === product.item.id);
     if (!!productInCart) {
       const updated = cart.map((cartItem) => {
         if (cartItem.product.id === productInCart.product.id) {
@@ -28,11 +28,12 @@ export const Home = () => {
         }
         return cartItem;
       });
+      handleCartUpdate!(updated);
     } else {
       const data = [
         ...cart,
         {
-          product: item,
+          product: product.item,
           qtd: 1,
         },
       ];
