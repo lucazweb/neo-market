@@ -21,19 +21,30 @@ export const handleLocalDataSave = (cart: Cart) => {
   localStorage.setItem(LOCAL_DATA_KEY, JSON.stringify(cart));
 };
 
+export const handleLocalDataParse = () => {
+  if (!localStorage.getItem(LOCAL_DATA_KEY)) return;
+  const data = localStorage.getItem(LOCAL_DATA_KEY);
+  const cart = JSON.parse(data!);
+  return cart;
+};
+
 function App() {
   const [state, setState] = useState<{ cart: Cart }>({
     cart: [],
   });
 
   useEffect(() => {
-    if (!localStorage.getItem(LOCAL_DATA_KEY)) return;
-    const data = localStorage.getItem(LOCAL_DATA_KEY);
-    const cart = JSON.parse(data!);
-    console.log("local cart", cart);
-    setState({
-      cart,
-    });
+    // if (!localStorage.getItem(LOCAL_DATA_KEY)) return;
+    // const data = localStorage.getItem(LOCAL_DATA_KEY);
+    // const cart = JSON.parse(data!);
+
+    const cart = handleLocalDataParse();
+
+    if (cart) {
+      setState({
+        cart,
+      });
+    }
   }, []);
 
   const handleCartUpdate = (cart: Cart) => {

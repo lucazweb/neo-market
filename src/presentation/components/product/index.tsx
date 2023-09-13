@@ -11,6 +11,8 @@ import {
   StyledWrapper,
 } from "./styled";
 import { Product as ProductType } from "@/domain/models/products";
+import { handleLocalDataParse } from "@/main/App";
+import { Cart } from "@/main/context";
 
 type ProductProps = {
   data: ProductType;
@@ -26,19 +28,32 @@ export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
 
   useEffect(() => {
     (async () => {
+      const cart: Cart | undefined = handleLocalDataParse();
+      const saved = cart?.find((item) => item.product.name === data.name);
+
       if (data.image) {
         const img = await import(`@/assets/${data.image}`);
         setProductData({
           ...productData,
           image: img.default,
+          qtd: saved?.qtd ? saved.qtd : 0,
         });
       }
     })();
   }, []);
 
   useEffect(() => {
-    console.log(productData.qtd);
-  }, [productData.qtd]);
+    const cart: Cart | null = handleLocalDataParse();
+    if (cart) {
+      const saved = cart.find((item) => item.product.name === data.name);
+      if (saved?.qtd) {
+        setProductData({
+          ...productData,
+          qtd: saved.qtd,
+        });
+      }
+    }
+  }, []);
 
   const handlePurchaseProduct = () => {
     handlePurchase({ item: data, qtd: productData.qtd });
@@ -50,7 +65,6 @@ export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
   };
 
   const handleAddProduct = () => {
-    console.log("handleAddProduct");
     setProductData({
       ...productData,
       qtd: productData.qtd + 1,
