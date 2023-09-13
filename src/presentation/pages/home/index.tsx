@@ -84,6 +84,26 @@ export const Home = () => {
       </Row>
       <HalfBanners />
       <TripleBanners />
+      <Row>
+        <Col md={12}>
+          <Row center="md">
+            <Col xs={12} sm={12} md={10}>
+              <ProductWrapper>
+                {data
+                  .reverse()
+                  .slice(4)
+                  .map((p) => (
+                    <Product
+                      key={p.id}
+                      data={p}
+                      handlePurchase={handlePurchase}
+                    />
+                  ))}
+              </ProductWrapper>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     </>
   );
 };
