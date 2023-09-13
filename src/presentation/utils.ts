@@ -9,18 +9,15 @@ export function generateRandomId(): string {
   return result;
 }
 
-export const selfDefeatingPatterns = [
-  "Personalização ",
-  "Filtro Mental",
-  "Generalização",
-  "Maximização e minimização",
-  "Pensamento dicotômico ou polarizado",
-  "Raciocínio emocional",
-  "Leitura da mente",
-  "Catastrofização (Tudo ou Nada)",
-  "Conclusões precipitadas",
-  "Deveria e tenho que",
-  "Rótulação",
-  "Coparação injusta",
-  "Atribuição de culpa",
-];
+export function generateRandomNumber(): number {
+  return Math.floor(Math.random() * 11) + 5;
+}
+
+export function calculateDiscountPrice(originalPrice: number, discount: number): number {
+  const discountAmount = originalPrice * (discount / 100);
+  return originalPrice - discountAmount;
+}
+
+export function handleCurrencyFormat (price: number) {
+  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price)
+}

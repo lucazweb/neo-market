@@ -13,6 +13,11 @@ import {
 import { Product as ProductType } from "@/domain/models/products";
 import { handleLocalDataParse } from "@/main/App";
 import { Cart } from "@/main/context";
+import {
+  calculateDiscountPrice,
+  generateRandomNumber,
+  handleCurrencyFormat as currency,
+} from "@/presentation/utils";
 
 type ProductProps = {
   data: ProductType;
@@ -21,6 +26,8 @@ type ProductProps = {
 };
 
 export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
+  const [discount, setDiscount] = useState(generateRandomNumber());
+
   const [productData, setProductData] = useState({
     image: "",
     qtd: 0,
@@ -84,15 +91,15 @@ export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
 
   return (
     <StyledWrapper>
-      <DiscountBox>Aproveite o desconto de 5%</DiscountBox>
+      <DiscountBox>Aproveite o desconto de {discount}%</DiscountBox>
       {productData && <img src={productData.image} alt="playcontrol" />}
 
       <ProductDescription>
         <span>{data.name}</span>
         <RattingBox>stars</RattingBox>
         <ProductPrice>
-          <strong>{data.price}</strong>
-          <span>R$ 45,90</span>
+          <strong>{currency(data.price)}</strong>
+          <span>{currency(calculateDiscountPrice(data.price, discount))}</span>
         </ProductPrice>
         <ButtonWrapper style={{ justifyContent: "center" }}>
           <ProductButton onClick={handlePurchaseProduct}>
