@@ -13,6 +13,8 @@ import {
 import { Product as ProductType } from "@/domain/models/products";
 import { handleLocalDataParse } from "@/main/App";
 import { Cart } from "@/main/context";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 import {
   calculateDiscountPrice,
   generateRandomNumber,
@@ -96,10 +98,14 @@ export const Product = ({ data, handlePurchase, handleQtd }: ProductProps) => {
 
       <ProductDescription>
         <span>{data.name}</span>
-        <RattingBox>stars</RattingBox>
+        <RattingBox>
+          <Rating value={3} readOnly />
+        </RattingBox>
         <ProductPrice>
-          <strong>{currency(data.price)}</strong>
-          <span>{currency(calculateDiscountPrice(data.price, discount))}</span>
+          <strong>
+            {currency(calculateDiscountPrice(data.price, discount))}
+          </strong>
+          <span>{currency(data.price)}</span>
         </ProductPrice>
         <ButtonWrapper style={{ justifyContent: "center" }}>
           <ProductButton onClick={handlePurchaseProduct}>

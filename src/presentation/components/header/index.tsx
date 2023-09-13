@@ -21,7 +21,7 @@ export const Header = () => (
         <Col sm={12} md={10}>
           <HeaderWrapper>
             <StyledLogo />
-            <SearchField />
+            <SearchField placeholder="Estou procurando por.." />
             <UserMenuWrapper>
               <UserInfo>
                 <FiUser color="white" size={25} />

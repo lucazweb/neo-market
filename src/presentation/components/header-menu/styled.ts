@@ -23,4 +23,12 @@ export const ItemList = styled.li`
   list-style: none;
   display: flex;
   align-items: center;
+  font-size: 0.9em;
+  &:first-child {
+    background: #DC0E53;
+    height: 35px;
+    margin-top: 10px;
+    border-radius: 8px 8px 0 0;
+    color: white;
+  }
 `

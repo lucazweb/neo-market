@@ -49,8 +49,37 @@ export const data: Product[] = [
     price: 200.9,
     image: "informatica/12_1.jpg",
   },
+];
+
+export const secondaryProducts: Product[] = [
+  {
+    id: generateRandomId(),
+    name: "Caixa de Som BT",
+    price: 183.9,
+    image: "informatica/81_2.jpg",
+  },
+  {
+    id: generateRandomId(),
+    name: "Galaxy S15",
+    price: 200.4,
+    image: "celulares/27_1.jpg",
+  },
+  {
+    id: generateRandomId(),
+    name: "Xiomi R56",
+    price: 1238.9,
+    image: "celulares/26.jpg",
+  },
+  {
+    id: generateRandomId(),
+    name: "Relógio Esportivo",
+    price: 82.9,
+    image: "relogios/8.jpg",
+  },
+ 
   
 ];
+
 
 
 export function generateRandomId(): string {

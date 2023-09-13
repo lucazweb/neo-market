@@ -20,7 +20,13 @@ export const ProductDescription = styled.div`
   margin-bottom: 12px;
 `
 
-export const RattingBox = styled.div``
+export const RattingBox = styled.div`
+  display: flex;
+  justify-content: center;
+  .rr--group  {
+    width: 35%;
+  }
+`
 
 export const ProductPrice = styled.div`
   display: flex;
